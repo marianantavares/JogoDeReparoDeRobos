@@ -216,7 +216,6 @@
                 <div class="robot-components">
                     <div>ID: ${robot.id}</div>
                     <div>Componentes: ${robot.getRemainingComponentCount()}</div>
-                    <div>Tempo estimado: ${robot.getEstimatedRepairTime()}s</div>
                 </div>
             `;
 
@@ -242,7 +241,6 @@
                         <p style="margin: 2px 0;"><strong>ID:</strong> ${robot.id}</p>
                         <p style="margin: 2px 0;"><strong>Prioridade:</strong> ${robot.priority}</p>
                         <p style="margin: 2px 0;"><strong>Componentes restantes:</strong> ${robot.getRemainingComponentCount()}</p>
-                        <p style="margin: 2px 0;"><strong>Tempo estimado:</strong> ${robot.getEstimatedRepairTime()}s</p>
                     </div>
                 </div>
             `;
@@ -272,7 +270,6 @@
                 componentDiv.innerHTML = `
                     <div class="component-name">${component.name}</div>
                     <div class="component-code">Código: ${component.code}</div>
-                    <div class="component-time">Tempo de reparo: ${component.repairTime}s</div>
                     ${index === 0 ? '<div style="color: #00ff88; font-weight: bold; margin-top: 5px;">👆 PRÓXIMO</div>' : ''}
                 `;
                 

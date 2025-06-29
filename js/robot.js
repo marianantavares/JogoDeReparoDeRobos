@@ -11,7 +11,6 @@
         constructor(name, code, repairTime, priority = 'standard') {
             this.name = name;
             this.code = code;
-            this.repairTime = repairTime; // Em segundos
             this.priority = priority; // emergency, standard, low
             this.id = this.generateId();
         }
@@ -172,9 +171,7 @@
         getRemainingComponentCount() {
             return this.componentStack.getSize();
         }
-        getEstimatedRepairTime() {
-            return this.componentStack.getTotalRepairTime();
-        }
+        
         getPriorityValue() {
             const priorityValues = { 'emergency': 1, 'standard': 2, 'low': 3 };
             return priorityValues[this.priority] || 2;
