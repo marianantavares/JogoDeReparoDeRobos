@@ -232,13 +232,18 @@
             }
 
             const robot = this.game.currentRobot;
+            const robotImg = this.getRobotImage(robot.model);
+
             container.innerHTML = `
-                <div style="text-align: left;">
-                    <h3>🤖 ${robot.model}</h3>
-                    <p><strong>ID:</strong> ${robot.id}</p>
-                    <p><strong>Prioridade:</strong> ${robot.priority}</p>
-                    <p><strong>Componentes restantes:</strong> ${robot.getRemainingComponentCount()}</p>
-                    <p><strong>Tempo estimado:</strong> ${robot.getEstimatedRepairTime()}s</p>
+                <div style="display: flex; align-items: center; gap: 18px; text-align: left;">
+                    <img src="${robotImg}" alt="${robot.model}" style="width: 120px; height: 120px; object-fit: contain; flex-shrink: 0;">
+                    <div>
+                        <h3 style="margin: 0 0 8px 0;">${robot.model}</h3>
+                        <p style="margin: 2px 0;"><strong>ID:</strong> ${robot.id}</p>
+                        <p style="margin: 2px 0;"><strong>Prioridade:</strong> ${robot.priority}</p>
+                        <p style="margin: 2px 0;"><strong>Componentes restantes:</strong> ${robot.getRemainingComponentCount()}</p>
+                        <p style="margin: 2px 0;"><strong>Tempo estimado:</strong> ${robot.getEstimatedRepairTime()}s</p>
+                    </div>
                 </div>
             `;
         }
@@ -378,6 +383,7 @@
                 this.showSuccessMessage('Pontuação salva com sucesso!');
                 this.updateRankingDisplay();
                 this.elements.playerName.value = '';
+                this.elements.saveScore.disabled = true; 
                 // Salva o ranking atualizado no localStorage
                 try {
                     const rankings = this.game.getRankings();
@@ -402,6 +408,20 @@
                 this.elements.codeInput.disabled = true;
                 this.elements.repairButton.disabled = true;
             }, 1000);
+        }
+
+        getRobotImage(model) {
+            const map = {
+                'Wall-E': 'img/wall-e.png',
+                'Karen': 'img/karen.png',
+                'Baymax': 'img/baymax.png',
+                'BB-8': 'img/bb-8.png',
+                'Rodney Lataria': 'img/rodney.png',
+                'R2-D2': 'img/r2-d2.png',
+                'EVE': 'img/eve.png',
+                'C-3PO': 'img/c-3po.png'
+            };
+            return map[model] || 'img/default.png';
         }
     }
 

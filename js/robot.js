@@ -202,7 +202,7 @@
     class RobotFactory {
         static createRandomRobot() {
             const models = [
-                'Wall-E', 'Rob', 'Baymax', 'Karen', 'BB-8', 'R2-D2', 'EVE', 'C-3PO'
+                'Wall-E', 'Rodney Lataria', 'Baymax', 'Karen', 'BB-8', 'R2-D2', 'EVE', 'C-3PO'
             ];
             const priorities = ['emergency', 'standard', 'low'];
             const priorityWeights = [0.2, 0.6, 0.2];
