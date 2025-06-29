@@ -3,10 +3,7 @@
 // =====================
 
 (function(global) {
-    /**
-     * Classe StackNode
-     * Nó da pilha
-     */
+    
     class StackNode {
         constructor(data) {
             this.data = data;
@@ -14,17 +11,13 @@
         }
     }
 
-    /**
-     * Classe Stack
-     * Pilha baseada em lista encadeada
-     */
     class Stack {
         constructor() {
             this.top = null;
             this.size = 0;
         }
 
-        // Adicionar elemento no topo da pilha
+        // Adiciona elemento no topo da pilha
         push(data) {
             const newNode = new StackNode(data);
             newNode.next = this.top;
@@ -32,7 +25,7 @@
             this.size++;
         }
 
-        // Remover e retornar o elemento do topo da pilha
+        // Remove e retorna o elemento do topo da pilha
         pop() {
             if (this.isEmpty()) {
                 throw new Error('Pilha vazia - não é possível fazer pop');
