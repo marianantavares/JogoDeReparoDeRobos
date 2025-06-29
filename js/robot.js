@@ -100,13 +100,29 @@
 
         // Gera código alfanumérico para componente
         generateComponentCode() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let code = '';
-            for (let i = 0; i < 4; i++) {
-                code += chars[Math.floor(Math.random() * chars.length)];
-            }
-            return code;
-        }
+             const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+             const digits = '0123456789';
+             const chars = letters + digits;
+
+        // Garante 1 letra e 1 número
+             const letter = letters[Math.floor(Math.random() * letters.length)];
+             const digit = digits[Math.floor(Math.random() * digits.length)];
+
+             let remaining = '';
+             for (let i = 0; i < 2; i++) {
+              remaining += chars[Math.floor(Math.random() * chars.length)];
+           }
+
+         // Embaralha os 4 caracteres para não deixar o padrao fixo (letra + número + 2 aleatorio)
+             const codeArray = (letter + digit + remaining).split('');
+             for (let i = codeArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+                [codeArray[i], codeArray[j]] = [codeArray[j], codeArray[i]];
+             }
+
+                 return codeArray.join('');
+              }
+
 
         // Inicia reparo do robô
         startRepair() {
