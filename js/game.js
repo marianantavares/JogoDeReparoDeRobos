@@ -17,7 +17,7 @@
             this.totalPausedDuration = 0;
             
             // Configurações do jogo
-            this.maxRobotsInWorkshop = 11; // Limite máximo de robôs na oficina
+            this.maxRobotsInWorkshop = 5; // Limite máximo de robôs na oficina
             this.robotSpawnInterval = 8000; // Intervalo para chegada de novos robôs (ms) - AJUSTADO PARA 8s
             this.spawnTimer = null;
             

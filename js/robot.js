@@ -184,7 +184,6 @@
                 state: this.state,
                 remainingComponents: this.getRemainingComponentCount(),
                 nextComponent: this.getNextComponent(),
-                estimatedTime: this.getEstimatedRepairTime(),
                 arrivalTime: this.arrivalTime,
                 repairStartTime: this.repairStartTime,
                 repairEndTime: this.repairEndTime,
