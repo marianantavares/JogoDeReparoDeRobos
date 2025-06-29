@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Reparo de Robôs - Oficina Futurista</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Tela Inicial -->
+        <div class="initial-screen" style="display: block;">
+            <h1>Oficina Futurista de Robôs</h1>
+            <div class="menu-buttons">
+                <button class="menu-btn play" id="startGame">Iniciar Jogo</button>
+                <button class="menu-btn how-to" id="howToPlay">Como Jogar</button>
+                <button class="menu-btn ranking" id="viewRanking">Ranking</button>
+            </div>
+        </div>
+
+        <!-- Como Jogar -->
+        <div id="howToModal" class="modal">
+            <div class="modal-content">
+                <h2>Como Jogar</h2>
+                <div class="how-to-content">
+                    <h3>Objetivo do Jogo:</h3>
+                    <p>Repare os robôs da forma mais eficiente possível!</p>
+                    <h3>Controles:</h3>
+                    <ul>
+                        <li><strong>Iniciar Jogo:</strong> Começa ou retoma o jogo.</li>
+                        <li><strong>Pausar:</strong> Pausa o jogo em andamento.</li>
+                        <li><strong>Reiniciar:</strong> Reinicia o jogo atual.</li>
+                    </ul>
+                    <h3>Dicas:</h3>
+                    <ul>
+                        <li>Fique de olho no tempo!</li>
+                        <li>Priorize os robôs de emergência.</li>
+                        <li>Use os componentes corretamente para maximizar os reparos.</li>
+                    </ul>
+                </div>
+                <button id="closeHowTo" class="control-btn">Fechar</button>
+            </div>
+        </div>
+        <!-- Modal de Ranking (opcional, pode ser implementado depois) -->
+        <div id="rankingModal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h2>Ranking</h2>
+                <div id="rankingContent"></div>
+                <button id="closeRanking" class="control-btn">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Função para formatar segundos em MM:SS
+    function formatTime(seconds) {
+        seconds = Number(seconds) || 0;
+        var min = Math.floor(seconds / 60);
+        var sec = seconds % 60;
+        return min.toString().padStart(2, '0') + ':' + sec.toString().padStart(2, '0');
+    }
+    // Redireciona para game.html ao clicar em Iniciar Jogo
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('startGame').addEventListener('click', function() {
+            window.location.href = 'game.html';
+        });
+        // Modal Como Jogar
+        document.getElementById('howToPlay').addEventListener('click', function() {
+            document.getElementById('howToModal').style.display = 'block';
+        });
+        document.getElementById('closeHowTo').addEventListener('click', function() {
+            document.getElementById('howToModal').style.display = 'none';
+        });
+        // Modal Ranking
+        var btnRanking = document.getElementById('viewRanking');
+        var modalRanking = document.getElementById('rankingModal');
+        var closeRanking = document.getElementById('closeRanking');
+        var rankingContent = document.getElementById('rankingContent');
+        btnRanking.addEventListener('click', function() {
+            var rankings = [];
+            var erro = false;
+            try {
+                var raw = localStorage.getItem('robot_repair_rankings');
+                if (raw) {
+                    rankings = JSON.parse(raw);
+                }
+            } catch (e) {
+                erro = true;
+            }
+            if (erro || !Array.isArray(rankings)) {
+                rankingContent.innerHTML = '<p>Erro ao ler o ranking.<br>Conteúdo bruto:<br><pre>' + (localStorage.getItem('robot_repair_rankings') || 'Vazio') + '</pre></p>';
+            } else if (rankings.length === 0) {
+                rankingContent.innerHTML = '<p>Nenhuma pontuação salva ainda.</p>';
+            } else {
+                // Tenta exibir como lista, mesmo que falte algum campo
+                var html = '<ol style="padding-left:1.5em;">';
+                rankings.slice(0, 10).forEach(function(item, idx) {
+                    if (typeof item === 'object') {
+                        html += `<li><strong>${item.name || 'Sem Nome'}</strong> - Pontos: <b>${item.score ?? '?'}</b> | Robôs: ${item.robotsRepaired ?? '?'} | Componentes: ${item.componentsRepaired ?? '?'} | Tempo: <b>${formatTime(item.gameTime)}</b></li>`;
+                    } else {
+                        html += `<li>${JSON.stringify(item)}</li>`;
+                    }
+                });
+                html += '</ol>';
+                rankingContent.innerHTML = html;
+            }
+            modalRanking.style.display = 'block';
+        });
+        closeRanking.addEventListener('click', function() {
+            modalRanking.style.display = 'none';
+        });
+        // Fecha modal ao clicar fora
+        window.addEventListener('click', function(e) {
+            if (e.target === modalRanking) modalRanking.style.display = 'none';
+        });
+    });
+    </script>
+</body>
+</html>

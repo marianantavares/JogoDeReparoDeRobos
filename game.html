@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Reparo de Robôs - Oficina Futurista</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Tela do Jogo -->
+        <div class="game-screen" style="display: block;">
+            <div class="game-header">
+                <h1>Oficina Futurista de Robôs</h1>
+                <div class="header-top-row">
+                  <div class="game-stats">
+                      <div class="stat">
+                          <span class="stat-label">Tempo:</span>
+                          <span id="timer" class="stat-value">00:00</span>
+                      </div>
+                      <div class="stat">
+                          <span class="stat-label">Robôs na Oficina:</span>
+                          <span id="robotCount" class="stat-value">0</span>
+                      </div>
+                      <div class="stat">
+                          <span class="stat-label">Consertados:</span>
+                          <span id="repairedCount" class="stat-value">0</span>
+                      </div>
+                      <div class="stat">
+                          <span class="stat-label">Componentes:</span>
+                          <span id="componentsCount" class="stat-value">0</span>
+                      </div>
+                  </div>
+                  <div class="game-controls">
+                      <button id="startButton" class="control-btn start">Iniciar Jogo</button>
+                      <button id="pauseButton" class="control-btn pause" disabled>Pausar</button>
+                      <button id="resetButton" class="control-btn reset">Reiniciar</button>
+                      <button id="backToMenuButton" class="control-btn back">Voltar ao Menu</button>
+                  </div>
+                </div>
+            </div>
+
+            <main class="game-main">
+                <div class="workshop-area">
+                    <div class="robot-queue">
+                        <h2>Fila de Reparo</h2>
+                        <div id="robotList" class="robot-list">
+                            <!-- Robôs serão adicionados aqui dinamicamente -->
+                        </div>
+                    </div>
+
+                    <div class="repair-station">
+                        <h2>Estação de Reparo</h2>
+                        <div id="currentRobot" class="current-robot">
+                            <p>Selecione um robô para começar o reparo</p>
+                        </div>
+                        
+                        <div id="componentStack" class="component-stack">
+                            <!-- Pilha de componentes será mostrada aqui -->
+                        </div>
+
+                        <div class="repair-input">
+                            <input type="text" id="codeInput" placeholder="Digite o código do componente" disabled>
+                            <button id="repairButton" disabled>Reparar Componente</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Modal de Game Over -->
+            <div id="gameOverModal" class="modal">
+                <div class="modal-content">
+                    <h2>Fim do Jogo!</h2>
+                    <div id="finalStats" class="final-stats">
+                        <!-- Estatísticas finais serão inseridas aqui -->
+                    </div>
+                    <div class="player-ranking">
+                        <input type="text" id="playerName" placeholder="Digite seu nome">
+                        <button id="saveScore">Salvar Pontuação</button>
+                    </div>
+                    <div id="ranking" class="ranking"></div>
+                    <button id="closeModal" class="control-btn">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts carregados em ordem específica -->
+        <script src="linkedList.js"></script>
+        <script src="stack.js"></script>
+        <script src="robot.js"></script>
+        <script src="game.js"></script>
+        <script src="main.js"></script>
+    </div>
+</body>
+</html>

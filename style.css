@@ -1,0 +1,494 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    margin: 0;
+    min-height: 100vh;
+    font-size: 18px;
+}
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.initial-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    text-align: center;
+}
+.initial-screen h1 {
+    font-size: 2.6em;
+    margin-top: 100px;
+    margin-bottom: 18px;
+}
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+}
+.menu-btn {
+    padding: 14px 32px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.25em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 160px;
+}
+.menu-btn.play {
+    margin-top: 200px;
+    background: #049f16;
+    color: #ffffff;
+}
+.menu-btn.play:hover {
+    background: #00cc6a;
+}
+.menu-btn.how-to {
+    background: #3498db;
+    color: white;
+}
+.menu-btn.how-to:hover {
+    background: #2980b9;
+}
+.menu-btn.ranking {
+    border-radius: 12px;
+    border: none;
+    margin-top: 0px;
+    background: #f39c12;
+    color: white;
+}
+.menu-btn.ranking:hover {
+    background: #e67e22;
+}
+.menu-btn:active, .control-btn:active {
+    transform: scale(0.97);
+    filter: brightness(0.95);
+}
+
+.game-screen {
+    display: none;
+}
+.game-header {
+    background: rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 18px;
+    justify-content: center;
+}
+.game-header h1 {
+    text-align: center;
+    font-size: 1.7em;
+    margin-bottom: 16px;
+}
+.game-stats {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+.stat {
+    background: rgba(255,255,255,0.2);
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 90px;
+}
+.stat-label {
+    display: block;
+    font-size: 1.1em;
+}
+.stat-value {
+    display: block;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 8px;
+}
+.workshop-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+.repair-station,
+.robot-queue {
+    background: rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 18px;
+}
+.repair-station h2,
+.robot-queue h2 {
+    margin-bottom: 14px;
+    text-align: center;
+    font-size: 1.3em;
+}
+.current-robot {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 14px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.component-stack {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 14px;
+    min-height: 80px;
+}
+.component-item {
+    background: rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-left: 4px solid #00ff88;
+    font-size: 1.15em;
+}
+.component-item.current {
+    background: rgba(0,255,136,0.3);
+    border-left-color: #fff;
+}
+.component-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+.component-code {
+    font-family: 'Courier New', monospace;
+    color: #00ff88;
+    font-size: 1.05em;
+}
+.component-time {
+    font-size: 0.98em;
+    opacity: 0.8;
+    margin-top: 8px;
+}
+.repair-input {
+    display: flex;
+    gap: 5px;
+}
+.repair-input input {
+    padding: 10px;
+    font-size: 1.05em;
+    border: 2px solid #00ff88;
+    border-radius: 10px;
+    outline: none;
+    background: #222b3a;
+    color: #fff;
+    transition: border 0.2s;
+}
+.repair-input input:focus {
+    border-color: #3498db;
+}
+.repair-input button {
+    padding: 10px 18px;
+    font-size: 1.05em;
+    border: none;
+    border-radius: 10px;
+    background: #00ff88;
+    color: #222b3a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.repair-input button:disabled {
+    background: #666;
+    color: #999;
+    cursor: not-allowed;
+}
+.repair-input button:not(:disabled):hover {
+    background: #00cc6a;
+}
+.robot-list {
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.robot-card {
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-size: 1.15em;
+}
+.robot-card.selected {
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+.robot-card.low {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+.robot-card.standard {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+}
+.robot-card.emergency {
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+}
+.robot-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.robot-name {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.robot-priority {
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 1em;
+    font-weight: bold;
+    background: rgba(255,255,255,0.2);
+}
+.robot-components {
+    font-size: 1em;
+    opacity: 0.9;
+}
+.game-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.control-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.15em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.control-btn.start {
+    background: #00ff88;
+    color: #333;
+}
+.control-btn.pause {
+    background: #ffaa00;
+    color: #333;
+}
+.control-btn.reset {
+    background: #ff4444;
+    color: white;
+}
+.control-btn.back {
+    background: #6c5ce7;
+    color: white;
+}
+.control-btn:disabled {
+    background: #666;
+    color: #999;
+    cursor: not-allowed;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+}
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    max-width: 480px;
+    width: 90%;
+    text-align: left;
+    max-height: 80vh;
+    overflow-y: auto;
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 32px #00ff8855, 0 20px 60px rgba(0,0,0,0.5);
+}
+.modal-content h2 {
+    margin-bottom: 16px;
+    font-size: 1.4em;
+    color: #00ff88;
+}
+#closeModal, #closeHowTo, #closeRanking {
+    margin-top: 16px;
+    background: #222b3a;
+    color: #00ff88;
+    border: 2px solid #00ff88;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-size: 1.1em;
+}
+#closeModal:hover, #closeHowTo:hover, #closeRanking:hover {
+    background: #00ff88;
+    color: #222b3a;
+}
+.how-to-content {
+    text-align: left;
+    line-height: 1.6;
+    font-size: 1.15em;
+}
+.how-to-content h3 {
+    color: #00ff88;
+    margin: 10px 0 8px 0;
+}
+.how-to-content ul {
+    margin-left: 20px;
+}
+.how-to-content li {
+    margin-bottom: 5px;
+}
+.final-stats {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 14px;
+}
+.final-stats div {
+    margin: 5px 0;
+    font-size: 1.15em;
+}
+.player-ranking {
+    margin: 10px 0;
+}
+.player-ranking input {
+    padding: 10px;
+    border-radius: 20px;
+    width: 150px;
+    font-size: 1.15em;
+}
+.player-ranking button {
+    padding: 10px 18px;
+    font-size: 1.15em;
+}
+.ranking {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 14px;
+    margin: 14px 0;
+    font-size: 1.15em;
+    box-shadow: 0 0 12px #00ff8840;
+    border: 1px solid #00ff88;
+}
+.ranking h3 {
+    margin-bottom: 12px;
+    font-size: 1.25em;
+}
+.ranking-item {
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 8px;
+    font-size: 1.15em;
+}
+.message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    font-weight: bold;
+    max-width: 300px;
+    font-size: 1.1em;
+    animation: slideIn 0.3s ease-out;
+}
+.message.success {
+    background: #00ff88;
+    color: #333;
+}
+.message.error {
+    background: #ff4444;
+    color: #fff;
+}
+.message.info {
+    background: #2a5298;
+    color: #fff;
+}
+.message.slideOut {
+    animation: slideOut 0.3s ease-in;
+}
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+@media (max-width: 900px) {
+    .container {
+        padding: 5px;
+    }
+    .menu-btn {
+        font-size: 1em;
+        padding: 10px 18px;
+    }
+    .control-btn {
+        font-size: 1em;
+        padding: 8px 14px;
+    }
+}
+.header-top-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+@media (max-width: 800px) {
+    .header-top-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .game-stats, .game-controls {
+        justify-content: center;
+    }
+}
+.initial-screen, .game-screen, .modal {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.initial-screen[style*="display: none"],
+.game-screen[style*="display: none"],
+.modal[style*="display: none"] {
+    opacity: 0;
+    visibility: hidden;
+}
+.initial-screen[style*="display: block"],
+.game-screen[style*="display: block"],
+.modal[style*="display: block"] {
+    opacity: 1;
+    visibility: visible;
+}
