@@ -17,7 +17,7 @@
             this.totalPausedDuration = 0;
             
             // Configurações do jogo
-            this.maxRobotsInWorkshop = 8; // Limite máximo de robôs na oficina
+            this.maxRobotsInWorkshop = 11; // Limite máximo de robôs na oficina
             this.robotSpawnInterval = 8000; // Intervalo para chegada de novos robôs (ms) - AJUSTADO PARA 8s
             this.spawnTimer = null;
             
@@ -29,7 +29,7 @@
                 robotsLost: 0 // Robôs que não foram atendidos a tempo
             };
 
-            // Rankings salvos no localStorage
+            // Rankings salvos no localStorage (agora como LinkedList)
             this.rankings = this.loadRankings();
             
             // Timer para atualização da interface
@@ -295,14 +295,13 @@
                 score: this.calculateScore()
             };
 
-            this.rankings.push(score);
-            
-            // Ordenar por score (maior primeiro)
+            this.rankings.append(score);
+            // Ordenar por score (maior primeiro) usando o método sort da LinkedList
             this.rankings.sort((a, b) => b.score - a.score);
-            
             // Manter apenas os top 10
-            this.rankings = this.rankings.slice(0, 10);
-            
+            while (this.rankings.getSize() > 10) {
+                this.rankings.removeAt(this.rankings.getSize() - 1);
+            }
             this.saveRankings();
             return true;
         }
@@ -320,17 +319,22 @@
         loadRankings() {
             try {
                 const saved = localStorage.getItem('robotRepairRankings');
-                return saved ? JSON.parse(saved) : [];
+                const arr = saved ? JSON.parse(saved) : [];
+                // Converter array para LinkedList
+                const list = new LinkedList();
+                arr.forEach(item => list.append(item));
+                return list;
             } catch (error) {
                 console.error('Erro ao carregar rankings:', error);
-                return [];
+                return new LinkedList();
             }
         }
 
         // Salvar rankings no localStorage
         saveRankings() {
             try {
-                localStorage.setItem('robotRepairRankings', JSON.stringify(this.rankings));
+                // Converter LinkedList para array antes de salvar
+                localStorage.setItem('robotRepairRankings', JSON.stringify(this.rankings.toArray()));
             } catch (error) {
                 console.error('Erro ao salvar rankings:', error);
             }
@@ -338,7 +342,8 @@
 
         // Obter rankings
         getRankings() {
-            return [...this.rankings]; // Retorna cópia para evitar modificações
+            // Retorna um array para exibição, mas não permite modificação direta
+            return this.rankings.toArray();
         }
 
         // Métodos de notificação para a interface (serão implementados na interface)
