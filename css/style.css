@@ -1,10 +1,14 @@
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: white;
     margin: 0;
     min-height: 100vh;
     font-size: 18px;
+}
+/* Para o fundo do index.html */
+.index-bg {
+    background: url('../img/background.png') no-repeat center center fixed;
+    background-size: cover;
 }
 .container {
     max-width: 1000px;
@@ -15,13 +19,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 50vh;
+    justify-content: flex-start;   
+    min-height: 100vh;
     text-align: center;
+    margin: 0;
+    padding-top: 80px;             
 }
 .initial-screen h1 {
     font-size: 2.6em;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 18px;
 }
 .menu-buttons {
@@ -29,41 +35,44 @@ body {
     flex-direction: column;
     gap: 18px;
     align-items: center;
+    justify-content: flex-start;
+    min-height: unset;      
+    margin-top: 16px;       
 }
 .menu-btn {
-    padding: 14px 32px;
+    padding: 22px 48px;
     border: none;
-    border-radius: 12px;
-    font-size: 1.25em;
+    border-radius: 16px;
+    font-size: 1.6em;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 160px;
+    min-width: 220px;
 }
 .menu-btn.play {
-    margin-top: 200px;
-    background: #049f16;
-    color: #ffffff;
+    margin-top: 0;
+    background: linear-gradient(135deg, #08361b, #0b3a1e); /* verde */
+    color: #fff;
 }
 .menu-btn.play:hover {
-    background: #00cc6a;
+    background: linear-gradient(135deg, #219150, #27ae60);
 }
+
 .menu-btn.how-to {
-    background: #3498db;
-    color: white;
+    background: linear-gradient(135deg, #092a40, #083350); /* azul */
+    color: #fff;
 }
 .menu-btn.how-to:hover {
-    background: #2980b9;
+    background: linear-gradient(135deg, #206090, #2980b9);
 }
+
 .menu-btn.ranking {
-    border-radius: 12px;
-    border: none;
-    margin-top: 0px;
-    background: #f39c12;
-    color: white;
+    background: linear-gradient(135deg, #5c1209, #682720); /* vermelho */
+    color: #fff;
+    border-radius: 16px;
 }
 .menu-btn.ranking:hover {
-    background: #e67e22;
+    background: linear-gradient(135deg, #a93226, #c0392b);
 }
 .menu-btn:active, .control-btn:active {
     transform: scale(0.97);
@@ -208,11 +217,30 @@ body {
     background: #00cc6a;
 }
 .robot-list {
-    max-height: 300px;
+    max-height: 500px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+.robot-list::-webkit-scrollbar {
+    width: 10px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+}
+
+.robot-list::-webkit-scrollbar-thumb {
+    background: #00ff88;
+    border-radius: 8px;
+}
+
+.robot-list::-webkit-scrollbar-thumb:hover {
+    background: #00cc6a;
+}
+
+.robot-list::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
 }
 .robot-card {
     border-radius: 10px;
@@ -345,6 +373,9 @@ body {
     text-align: left;
     line-height: 1.6;
     font-size: 1.15em;
+    max-height: 55vh;
+    overflow-y: auto;
+    padding-right: 8px;
 }
 .how-to-content h3 {
     color: #00ff88;
@@ -384,6 +415,29 @@ body {
     text-align: left;
     line-height: 1.6;
     font-size: 1.15em;
+}
+.rankingContent::-webkit-scrollbar {
+    width: 12px;
+    background: rgba(0,255,136,0.10);
+    border-radius: 8px;
+}
+.rankingContent::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #00ff88 40%, #2980b9 100%);
+    border-radius: 8px;
+    border: 2px solid #1e3c72;
+}
+.rankingContent::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #00cc6a 40%, #206090 100%);
+}
+.rankingContent::-webkit-scrollbar-track {
+    background: rgba(30,60,114,0.15);
+    border-radius: 8px;
+}
+
+/* Firefox */
+.rankingContent {
+    scrollbar-width: thin;
+    scrollbar-color: #00ff88 #1e3c72;
 }
 
 .message {
@@ -479,4 +533,35 @@ body {
 .modal[style*="display: block"] {
     opacity: 1;
     visibility: visible;
+}
+
+.futurista {
+    font-family: 'Orbitron', Arial, sans-serif;
+    letter-spacing: 2px;
+    color: #a5edcc;
+    text-shadow: 0 2px 12px #ffffff55, 0 0 2px #fff;
+    font-size: 1.2em;
+}
+.how-to-content::-webkit-scrollbar {
+    width: 12px;
+    background: rgba(0,255,136,0.10);
+    border-radius: 8px;
+}
+.how-to-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #00ff88 40%, #2980b9 100%);
+    border-radius: 8px;
+    border: 2px solid #1e3c72;
+}
+.how-to-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #00cc6a 40%, #206090 100%);
+}
+.how-to-content::-webkit-scrollbar-track {
+    background: rgba(30,60,114,0.15);
+    border-radius: 8px;
+}
+
+/* Firefox */
+.how-to-content {
+    scrollbar-width: thin;
+    scrollbar-color: #00ff88 #1e3c72;
 }
