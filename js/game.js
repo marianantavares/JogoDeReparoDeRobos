@@ -318,7 +318,7 @@
         // Carregar rankings do localStorage
         loadRankings() {
             try {
-                const saved = localStorage.getItem('robotRepairRankings');
+                const saved = localStorage.getItem('robot_repair_rankings');
                 const arr = saved ? JSON.parse(saved) : [];
                 // Converter array para LinkedList
                 const list = new LinkedList();
@@ -334,7 +334,7 @@
         saveRankings() {
             try {
                 // Converter LinkedList para array antes de salvar
-                localStorage.setItem('robotRepairRankings', JSON.stringify(this.rankings.toArray()));
+                localStorage.setItem('robot_repair_rankings', JSON.stringify(this.rankings.toArray()));
             } catch (error) {
                 console.error('Erro ao salvar rankings:', error);
             }
