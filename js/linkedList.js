@@ -40,37 +40,6 @@
             this.size++;
         }
 
-        // Adicionar elemento no início da lista
-        prepend(data) {
-            const newNode = new Node(data);
-            newNode.next = this.head;
-            this.head = newNode;
-            this.size++;
-        }
-
-        // Inserir elemento em uma posição específica
-        insertAt(index, data) {
-            if (index < 0 || index > this.size) {
-                throw new Error('Índice fora dos limites');
-            }
-
-            if (index === 0) {
-                this.prepend(data);
-                return;
-            }
-
-            const newNode = new Node(data);
-            let current = this.head;
-            
-            for (let i = 0; i < index - 1; i++) {
-                current = current.next;
-            }
-            
-            newNode.next = current.next;
-            current.next = newNode;
-            this.size++;
-        }
-
         // Remover elemento por valor
         remove(data) {
             if (!this.head) return false;
@@ -258,19 +227,6 @@
                     current = current.next;
                 }
             } while (swapped);
-        }
-
-        // Mover elemento de uma posição para outra
-        move(fromIndex, toIndex) {
-            if (fromIndex < 0 || fromIndex >= this.size || 
-                toIndex < 0 || toIndex >= this.size || 
-                fromIndex === toIndex) {
-                return false;
-            }
-
-            const data = this.removeAt(fromIndex);
-            this.insertAt(toIndex, data);
-            return true;
         }
 
         // Obter primeiro elemento

@@ -18,7 +18,7 @@
             
             // Configurações do jogo
             this.maxRobotsInWorkshop = 5; // Limite máximo de robôs na oficina
-            this.robotSpawnInterval = 8000; // Intervalo para chegada de novos robôs (ms) - AJUSTADO PARA 8s
+            this.robotSpawnInterval = 8000; // Intervalo para chegada de novos robôs (ms) - 8s
             this.spawnTimer = null;
             
             // Estatísticas
@@ -26,10 +26,9 @@
                 robotsRepaired: 0,
                 componentsRepaired: 0,
                 totalGameTime: 0,
-                robotsLost: 0 // Robôs que não foram atendidos a tempo
             };
 
-            // Rankings salvos no localStorage (agora como LinkedList)
+            // Rankings salvos no localStorage
             this.rankings = this.loadRankings();
             
             // Timer para atualização da interface

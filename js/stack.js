@@ -79,36 +79,6 @@
             return this.toArray().reverse();
         }
 
-        // Buscar elemento na pilha
-        contains(data) {
-            let current = this.top;
-
-            while (current) {
-                if (current.data === data) {
-                    return true;
-                }
-                current = current.next;
-            }
-
-            return false;
-        }
-
-        // Buscar elemento por função de comparação
-        findBy(predicate) {
-            let current = this.top;
-            let index = 0;
-
-            while (current) {
-                if (predicate(current.data)) {
-                    return { data: current.data, index };
-                }
-                current = current.next;
-                index++;
-            }
-
-            return null;
-        }
-
         // Iterar sobre todos os elementos (do topo para a base)
         forEach(callback) {
             let current = this.top;
@@ -119,20 +89,6 @@
                 current = current.next;
                 index++;
             }
-        }
-
-        // Obter elemento por índice (0 = topo)
-        getAt(index) {
-            if (index < 0 || index >= this.size) {
-                throw new Error('Índice fora dos limites');
-            }
-
-            let current = this.top;
-            for (let i = 0; i < index; i++) {
-                current = current.next;
-            }
-
-            return current.data;
         }
 
         // Clonar a pilha
